@@ -5,18 +5,18 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: ..
-source:
-    repoURL: git@github.com:tchoppy/dummy_chart_deployment.git
-    path: production
-    targetRevision: main
-    helm:
-      valueFiles:
-        - values.yaml
-destination:
-    server: https://kubernetes.default.svc
-    namespace: dummy-production
 spec:
   project: default
+  source:
+      repoURL: https://github.com/tchoppy/dummy_chart_deployment.git
+      path: production
+      targetRevision: main
+      helm:
+        valueFiles:
+          - values.yaml
+  destination:
+      server: https://kubernetes.default.svc
+      namespace: dummy-production
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -25,15 +25,15 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: ..
-source:
-    repoURL: git@github.com:tchoppy/dummy_chart_deployment.git
-    path: staging
-    targetRevision: main
-    helm:
-      valueFiles:
-        - values.yaml
-destination:
-    server: https://kubernetes.default.svc
-    namespace: dummy-staging
 spec:
   project: default
+  source:
+      repoURL: https://github.com/tchoppy/dummy_chart_deployment.git
+      path: staging
+      targetRevision: main
+      helm:
+        valueFiles:
+          - values.yaml
+  destination:
+      server: https://kubernetes.default.svc
+      namespace: dummy-staging

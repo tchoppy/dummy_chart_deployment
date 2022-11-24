@@ -5,4 +5,4 @@ version: 1.0.0
 dependencies:
   - name: dummy-chart
     version: "0.1.0"
-    repository: "oci://609454027511.dkr.ecr.eu-central-1.amazonaws.com/dummy-chart"
+    repository: "oci://609454027511.dkr.ecr.eu-central-1.amazonaws.com"
