@@ -7,8 +7,8 @@ image:
   tag: ""
 
 service:
-  type: LoadBalancer
-  port: 80
+  type: ClusterIP
+  port: 90
 
 autoscaling:
   enabled: false
