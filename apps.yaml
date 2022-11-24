@@ -17,6 +17,12 @@ spec:
   destination:
       server: https://kubernetes.default.svc
       namespace: dummy-production
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -37,3 +43,9 @@ spec:
   destination:
       server: https://kubernetes.default.svc
       namespace: dummy-staging
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
