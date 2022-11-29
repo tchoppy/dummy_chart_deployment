@@ -9,7 +9,7 @@ spec:
   project: default
   source:
       repoURL: https://github.com/tchoppy/dummy_chart_deployment.git
-      path: production
+      path: apps/production
       targetRevision: main
       helm:
         valueFiles:
@@ -35,7 +35,7 @@ spec:
   project: default
   source:
       repoURL: https://github.com/tchoppy/dummy_chart_deployment.git
-      path: staging
+      path: apps/staging
       targetRevision: main
       helm:
         valueFiles:
@@ -43,6 +43,33 @@ spec:
   destination:
       server: https://kubernetes.default.svc
       namespace: dummy-staging
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dummy-app-lab
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: ..
+spec:
+  project: default
+  source:
+    chart: dummy-chart
+    repoURL: 609454027511.dkr.ecr.eu-central-1.amazonaws.com
+    targetRevision: 0.1.0
+    helm:
+      valueFiles: 
+        - values.yaml
+        - https://github.com/tchoppy/dummy_chart_deployment/blob/main/apps/staging/values.yaml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: dummy-lab
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

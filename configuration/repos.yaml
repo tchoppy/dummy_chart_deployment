@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ecr-helm-repo
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  enableOCI: "true"
+  url: 609454027511.dkr.ecr.$(echo $AWS_DEFAULT_REGION).amazonaws.com
+  name: awsecr
+  type: helm
+  password: $(aws ecr get-login-password)
+  username: AWS
